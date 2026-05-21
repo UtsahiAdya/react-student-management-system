@@ -17,7 +17,9 @@ ReactDOM.createRoot(
 
   <React.StrictMode>
 <ThemeProvider>
+<AuthProvider>
     <App />
+    </AuthProvider>  
 </ThemeProvider>
   </React.StrictMode>
 
