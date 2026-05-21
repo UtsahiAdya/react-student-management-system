@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../context/ThemeContext";
 import { useEffect } from "react";
+import { useContext } from "react";
 function Students(props){
-   
+    const {theme, toggleTheme}=useContext(ThemeContext); 
 
   return(
-
+  
     <>
 
       {

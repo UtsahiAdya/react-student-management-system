@@ -28,7 +28,10 @@ function StudentLayout(){
 
                         <button onClick={toggleTheme} > Toggle Theme</button>
 
+                     
+
             <Outlet/>
+            <div>   Student</div>
         </div>
     )
 }

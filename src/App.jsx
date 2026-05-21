@@ -1,171 +1,3 @@
-// import {
-//   BrowserRouter,
-//   Routes,
-//   Route,
-//   Link
-// } from "react-router-dom";
-
-// import Students from "./pages/Students/Students";
-// import AddStudents from "./pages/Students/AddStudents";
-// import NotFound from "./pages/Students/NotFound";
-// import StudentDetails from "./pages/Students/StudentDetails";
-// import EditStudent from "./pages/Students/EditStudent";
-// import StudentLayout from "./pages/Students/StudentLayout";
-// import Home from "./Home";
-// import "./Navbar.css";
-// import { use, useEffect, useState } from "react";
-
-
-
-// function App() {
-//   const [students, setStudents] = useState([]);
-//   const [student, setStudent] = useState({
-//     Name: "",
-//     Age: "",
-//     City: ""
-//   });
-//   useEffect(() => {
-
-//     const savedStudent =
-//       localStorage.getItem("students");
-
-//     if (savedStudent) {
-
-//       setStudents(
-//         JSON.parse(savedStudent)
-//       )
-
-//     }
-
-//   }, [])
-
-
-
-//   useEffect(() => {
-
-//     // prevent initial empty overwrite
-//     if (students.length > 0) {
-
-//       localStorage.setItem(
-
-//         "students",
-
-//         JSON.stringify(students)
-
-//       )
-
-//     }
-
-//   }, [students])
-
-//   function deleteStudent(index) {
-//     const newStudents = [...students];
-//     newStudents.splice(index, 1)
-//     setStudents(newStudents);
-
-//   }
-
-//   function addStudent(student) {
-//     const newStudents = [...students,
-//       student
-//     ]
-//     setStudents(newStudents);
-//   }
-
-//   return (
-
-//     <BrowserRouter>
-
-//       <nav>
-
-//         <Link to="/students/all">
-//           Students
-//         </Link>
-
-//         <Link to="/students/add">
-//           AddStudents
-//         </Link>
-//         <Link to="/">Home</Link>
-//       </nav>
-
-
-//       <Route
-
-//   path="/students"
-
-//   element={<StudentLayout />}
-
-// >
-
-//   <Route
-
-//     index
-
-//     element={
-
-//       <Students
-//         student={student}
-//         students={students}
-//         deleteStudent={deleteStudent}
-//       />
-
-//     }
-
-//   />
-
-//   <Route
-//     path="all"
-//     element={<Students ... />}
-//   />
-
-//   <Route
-//     path="add"
-//     element={<AddStudents ... />}
-//   />
-
-// </Route>
-
-
-
-//     </BrowserRouter>
-
-//   )
-
-// }
-
-// export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import {
 
   BrowserRouter,
@@ -201,10 +33,13 @@ import EditStudent from "./pages/Students/EditStudent";
 import StudentLayout from "./pages/Students/StudentLayout";
 
 import NotFound from "./pages/Students/NotFound";
+import DashboardLayout from "./pages/Nested/DashboardLayout";
+import Profile from "./pages/Nested/Profile";
+import Settings from "./pages/Nested/Settings";
 
 
 function App() {
-    const{theme, toggleTheme}=useContext(ThemeContext)
+  const { theme, toggleTheme } = useContext(ThemeContext)
 
   // Student list state
   const [students, setStudents] =
@@ -229,7 +64,7 @@ function App() {
       localStorage.getItem("students");
 
 
-    if(savedStudents){
+    if (savedStudents) {
 
       setStudents(
 
@@ -257,7 +92,7 @@ function App() {
 
 
   // Add student
-  function addStudent(student){
+  function addStudent(student) {
 
     const newStudents = [
 
@@ -274,7 +109,7 @@ function App() {
 
 
   // Delete student
-  function deleteStudent(index){
+  function deleteStudent(index) {
 
     const newStudents =
       [...students];
@@ -290,171 +125,172 @@ function App() {
 
   return (
     <div
-     style={{backgroundColor:theme==="light"?"white":"grey",
-            color:theme==="light"?"grey":"white"
-        }}
+      style={{
+        backgroundColor: theme === "light" ? "white" : "grey",
+        color: theme === "light" ? "grey" : "white"
+      }}
     >
 
-    <BrowserRouter>
+      <BrowserRouter>
 
-      {/* Top Navbar */}
-      <nav   style={{backgroundColor:theme==="light"?"white":"grey",
-            color:theme==="light"?"grey":"white"
-        }}>
+        {/* Top Navbar */}
+        <nav>
 
-        <Link to="/">
-          Home
-        </Link>
+          <Link to="/">
+            Home
+          </Link>
 
+          <Link to="/students">
+            Students
+          </Link>
+          <Link to="/dashboard">Dashboard</Link>
+          <button onClick={toggleTheme}>
+            Toggle Theme
+          </button>
 
-        <Link to="/students">
-          Students
-        </Link>
-
-
-        <Link to="/students/add">
-          Add Student
-        </Link>
-                  <button onClick={toggleTheme} > Toggle Theme</button>
-
-      </nav>
+        </nav>
 
 
-      <Routes>
+        <Routes>
 
-        {/* Home */}
-        <Route
-
-          path="/"
-
-          element={<Home />}
-
-        />
-
-
-        {/* Nested Student Routes */}
-        <Route
-
-          path="/students"
-
-          element={<StudentLayout />}
-
-        >
-
-          {/* Default nested route */}
+          {/* Home */}
           <Route
 
-            index
+            path="/"
 
-            element={
-
-              <Students
-
-                students={students}
-
-                deleteStudent={deleteStudent}
-
-              />
-
-            }
+            element={<Home />}
 
           />
 
 
-          {/* All Students */}
+          {/* Nested Student Routes */}
           <Route
 
-            path="all"
+            path="/students"
 
-            element={
+            element={<StudentLayout />}
 
-              <Students
+          >
 
-                students={students}
+            {/* Default nested route */}
+            <Route
 
-                deleteStudent={deleteStudent}
+              index
 
-              />
+              element={
 
-            }
+                <Students
 
-          />
+                  students={students}
+
+                  deleteStudent={deleteStudent}
+
+                />
+
+              }
+
+            />
 
 
-          {/* Add Student */}
+            {/* All Students */}
+            <Route
+
+              path="all"
+
+              element={
+
+                <Students
+
+                  students={students}
+
+                  deleteStudent={deleteStudent}
+
+                />
+
+              }
+
+            />
+
+
+            {/* Add Student */}
+            <Route
+
+              path="add"
+
+              element={
+
+                <AddStudents
+
+                  student={student}
+
+                  setStudent={setStudent}
+
+                  addStudent={addStudent}
+
+                />
+
+              }
+
+            />
+
+
+            {/* Student Details */}
+            <Route
+
+              path="details/:id"
+
+              element={
+
+                <StudentDetails
+
+                  students={students}
+
+                />
+
+              }
+
+            />
+
+
+            {/* Edit Student */}
+            <Route
+
+              path="edit/:id"
+
+              element={
+
+                <EditStudent
+
+                  students={students}
+
+                  setStudents={setStudents}
+
+                />
+
+              }
+
+            />
+
+          </Route>
+            <Route path="/dashboard" element={<DashboardLayout />} >
+            <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<Settings />} />
+
+          </Route>
+
+          {/* 404 */}
           <Route
 
-            path="add"
+            path="*"
 
-            element={
-
-              <AddStudents
-
-                student={student}
-
-                setStudent={setStudent}
-
-                addStudent={addStudent}
-
-              />
-
-            }
+            element={<NotFound />}
 
           />
+       
 
+        </Routes>
 
-          {/* Student Details */}
-          <Route
-
-            path="details/:id"
-
-            element={
-
-              <StudentDetails
-
-                students={students}
-
-              />
-
-            }
-
-          />
-
-
-          {/* Edit Student */}
-          <Route
-
-            path="edit/:id"
-
-            element={
-
-              <EditStudent
-
-                students={students}
-
-                setStudents={setStudents}
-
-              />
-
-            }
-
-          />
-
-        </Route>
-
-
-        {/* 404 */}
-        <Route
-
-          path="*"
-
-          element={<NotFound />}
-
-        />
-
-      </Routes>
-
-    </BrowserRouter>
+      </BrowserRouter>
     </div>
 
   )
