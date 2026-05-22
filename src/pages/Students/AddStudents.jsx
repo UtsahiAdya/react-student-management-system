@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom"
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
+import { CounterContext } from "../../context/CounterContext";
 
 function AddStudents(props) {
     const navigate = useNavigate();
     const {theme, toggleTheme}=useContext(ThemeContext)
+    const{count, increment, decrement}=useContext(CounterContext);
 
     return (
 
@@ -13,7 +15,9 @@ function AddStudents(props) {
             color:theme==="light"?"grey":"white"
         }}
         >
-
+            <button onClick={decrement}>Decrement</button>
+            <p>Count : {count}</p>
+            <button onClick={increment} >Increment</button>
             <input
 
                 value={props.student.Name}

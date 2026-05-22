@@ -1,8 +1,11 @@
 import { useParams } from "react-router-dom";
+import { CounterContext } from "../../context/CounterContext";
 
 function StudentDetails(props) {
 
     const params = useParams();
+    const { count, increment, decrement } = useContext(CounterContext);
+
 
     const student =
         props.students[params.id];
@@ -23,6 +26,9 @@ function StudentDetails(props) {
     return (
 
         <div>
+            <button onClick={decrement}>Decrement</button>
+            <p>{count}</p>
+            <button onClick={increment} >Increment</button>
 
             <h2>Student Details</h2>
 

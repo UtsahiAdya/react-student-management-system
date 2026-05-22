@@ -5,10 +5,11 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import {ThemeProvider } from "./context/ThemeContext";
-
+import AuthProvider from "./context/AuthContext";
 import App from './App'
 
 import './index.css'
+import CounterProvider from './context/CounterContext';
 
 
 ReactDOM.createRoot(
@@ -18,7 +19,9 @@ ReactDOM.createRoot(
   <React.StrictMode>
 <ThemeProvider>
 <AuthProvider>
+  <CounterProvider>
     <App />
+    </CounterProvider>
     </AuthProvider>  
 </ThemeProvider>
   </React.StrictMode>

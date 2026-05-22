@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CounterContext } from "../../context/CounterContext";
 
 import {
 
@@ -8,7 +9,7 @@ import {
 } from "react-router-dom";
 
 
-function EditStudent(props){
+function EditStudent(props) {
 
   // ✅ Hook at top level
   const param = useParams();
@@ -20,6 +21,7 @@ function EditStudent(props){
   // ✅ Get clicked student using URL id
   const stud =
     props.students[param.id];
+  const { count, increment, decrement } = useContext(CounterContext);
 
 
   // ✅ Hook must ALWAYS run
@@ -35,9 +37,9 @@ function EditStudent(props){
 
       stud || {
 
-        Name:"",
-        Age:"",
-        City:""
+        Name: "",
+        Age: "",
+        City: ""
 
       }
 
@@ -52,9 +54,9 @@ function EditStudent(props){
 
   // ✅ Hooks are now ABOVE condition
 
-  if(!stud){
+  if (!stud) {
 
-    return(
+    return (
 
       <h2>
 
@@ -67,7 +69,7 @@ function EditStudent(props){
   }
 
 
-  function saveStudent(){
+  function saveStudent() {
 
     // ❌ Earlier mistake:
     // [...students]
@@ -111,9 +113,12 @@ function EditStudent(props){
   }
 
 
-  return(
+  return (
 
     <div>
+      <button onClick={decrement}>Decrement</button>
+      <p>{count}</p>
+      <button onClick={increment} >Increment</button>
 
       <h2>Edit Student</h2>
 
@@ -124,7 +129,7 @@ function EditStudent(props){
 
         placeholder="Enter name"
 
-        onChange={(e)=>{
+        onChange={(e) => {
 
           // ❌ Earlier mistake:
           // props.setEditedStudent()
@@ -158,7 +163,7 @@ function EditStudent(props){
 
         placeholder="Enter age"
 
-        onChange={(e)=>{
+        onChange={(e) => {
 
           setEditedStudent({
 
@@ -179,7 +184,7 @@ function EditStudent(props){
 
         placeholder="Enter city"
 
-        onChange={(e)=>{
+        onChange={(e) => {
 
           setEditedStudent({
 
